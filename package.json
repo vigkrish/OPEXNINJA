@@ -1,0 +1,37 @@
+{
+  "name": "opexninja",
+  "version": "1.0.0",
+  "description": "OPEX Ninja - AI-Powered Operational Excellence Platform",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run -r --parallel dev",
+    "dev:web": "npm -w @opexninja/web run dev",
+    "dev:api": "npm -w @opexninja/api run dev",
+    "build": "npm run -r build",
+    "build:web": "npm -w @opexninja/web run build",
+    "build:api": "npm -w @opexninja/api run build",
+    "preview": "npm -w @opexninja/web run preview",
+    "test": "npm run -r test",
+    "test:watch": "npm run -r test:watch",
+    "test:coverage": "npm run -r test:coverage",
+    "lint": "npm run -r lint",
+    "format": "npm run -r format",
+    "type-check": "npm run -r type-check",
+    "clean": "npm run -r clean && rm -rf node_modules",
+    "db:generate": "npm -w @opexninja/api run db:generate",
+    "db:migrate": "npm -w @opexninja/api run db:migrate",
+    "db:studio": "npm -w @opexninja/api run db:studio"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  }
+}
