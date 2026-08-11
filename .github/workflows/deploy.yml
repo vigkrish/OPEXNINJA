@@ -14,6 +14,10 @@ concurrency:
   group: pages
   cancel-in-progress: true
 
+env:
+  VITE_API_URL: https://opexninja-api.onrender.com/api
+  VITE_BASE_PATH: /OPEXNINJA/
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -26,28 +30,25 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
+          cache: npm
 
       - name: Install dependencies
-        run: npm install
+        run: npm install --no-audit --no-fund
 
       - name: Lint and type-check (web)
         run: |
           npm -w @opexninja/web run lint
           npm -w @opexninja/web run type-check
 
-      - name: Validate VITE_API_URL
+      - name: Validate build environment
         run: |
-          if [ -z "${VITE_API_URL:-}" ]; then
-            echo "VITE_API_URL is not set. Set it in the workflow, environment, or repository secrets."
-            exit 1
-          fi
-          echo "VITE_API_URL is set"
+          test -n "$VITE_API_URL"
+          test "$VITE_API_URL" = "https://opexninja-api.onrender.com/api"
+          test "$VITE_BASE_PATH" = "/OPEXNINJA/"
+          echo "VITE_API_URL=$VITE_API_URL"
+          echo "VITE_BASE_PATH=$VITE_BASE_PATH"
 
       - name: Build website
-        env:
-          VITE_BASE_PATH: /OPEXNINJA/
-          VITE_API_URL: https://opexninja-api.onrender.com/api
         run: npm run build:web
 
       - name: Configure GitHub Pages
