@@ -13,55 +13,63 @@ const prisma = new PrismaClient();
 const PORT = process.env.PORT || 3001;
 const NODE_ENV = process.env.NODE_ENV || 'development';
 
-// Middleware
+const allowedOrigins = (process.env.CORS_ORIGIN || 'http://localhost:3000')
+  .split(',')
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+
 app.use(helmet());
 app.use(
   cors({
-    origin: process.env.CORS_ORIGIN || 'http://localhost:3000',
+    origin(origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+        return;
+      }
+      callback(new Error('Origin not allowed by CORS'));
+    },
     credentials: true,
   })
 );
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: '1mb' }));
+app.use(express.urlencoded({ extended: true, limit: '1mb' }));
 
-// Health check
-app.get('/health', (req, res) => {
-  res.json({ status: 'ok', timestamp: new Date().toISOString() });
+app.get('/health', (_req, res) => {
+  res.json({
+    status: 'ok',
+    service: 'opexninja-api',
+    timestamp: new Date().toISOString(),
+  });
 });
 
-// API Routes
 app.use('/api/auth', authRoutes(prisma));
 app.use('/api/services', serviceRoutes(prisma));
 app.use('/api/contact', contactRoutes(prisma));
 
-// 404 handler
-app.use((req, res) => {
+app.use((_req, res) => {
   res.status(404).json({
     success: false,
     error: {
       code: 'NOT_FOUND',
-      message: `Route ${req.path} not found`,
+      message: 'Route not found',
     },
   });
 });
 
-// Error handler
 app.use(errorHandler);
 
-// Start server
 const server = app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
-  console.log(`📝 Environment: ${NODE_ENV}`);
+  console.log(`OPEX Ninja API running on port ${PORT}`);
+  console.log(`Environment: ${NODE_ENV}`);
 });
 
-// Graceful shutdown
-process.on('SIGINT', async () => {
-  console.log('\n⛔ Shutting down gracefully...');
+async function shutdown(signal: string) {
+  console.log(`${signal}: shutting down...`);
   await prisma.$disconnect();
-  server.close(() => {
-    console.log('✅ Server closed');
-    process.exit(0);
-  });
-});
+  server.close(() => process.exit(0));
+}
+
+process.on('SIGINT', () => void shutdown('SIGINT'));
+process.on('SIGTERM', () => void shutdown('SIGTERM'));
 
 export { app, prisma };
