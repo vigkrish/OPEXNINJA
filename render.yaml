@@ -10,10 +10,8 @@ services:
       - key: NODE_ENV
         value: production
       - key: CORS_ORIGIN
-        # Include the GitHub Pages origin (no path) and a placeholder for custom domain(s).
-        # The API splits by comma, so multiple origins are supported, e.g.:
-        # "https://vigkrish.github.io,https://example.com"
-        value: https://vigkrish.github.io,https://example.com
+        # GitHub Pages project-site origin. Add custom domains here when they are configured.
+        value: https://vigkrish.github.io
       - key: DATABASE_URL
         fromDatabase:
           name: opexninja-db
