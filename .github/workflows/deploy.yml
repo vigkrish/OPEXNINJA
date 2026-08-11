@@ -26,9 +26,23 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: 'npm'
 
       - name: Install dependencies
         run: npm install
+
+      - name: Lint and type-check (web)
+        run: |
+          npm -w @opexninja/web run lint
+          npm -w @opexninja/web run type-check
+
+      - name: Validate VITE_API_URL
+        run: |
+          if [ -z "${VITE_API_URL:-}" ]; then
+            echo "VITE_API_URL is not set. Set it in the workflow, environment, or repository secrets."
+            exit 1
+          fi
+          echo "VITE_API_URL is set"
 
       - name: Build website
         env:
