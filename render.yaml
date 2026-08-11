@@ -4,13 +4,16 @@ services:
     runtime: node
     plan: free
     buildCommand: npm install && npm -w @opexninja/api run db:generate && npm -w @opexninja/api run build
-    startCommand: npx prisma migrate deploy --schema apps/api/prisma/schema.prisma && npm -w @opexninja/api run start
+    startCommand: npm -w @opexninja/api run start
     healthCheckPath: /health
     envVars:
       - key: NODE_ENV
         value: production
       - key: CORS_ORIGIN
-        value: https://vigkrish.github.io
+        # Include the GitHub Pages origin (no path) and a placeholder for custom domain(s).
+        # The API splits by comma, so multiple origins are supported, e.g.:
+        # "https://vigkrish.github.io,https://example.com"
+        value: https://vigkrish.github.io,https://example.com
       - key: DATABASE_URL
         fromDatabase:
           name: opexninja-db
