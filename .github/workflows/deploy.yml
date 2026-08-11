@@ -62,6 +62,16 @@ jobs:
             exit 1
           fi
 
+      - name: Ensure SPA fallback for GitHub Pages
+        run: |
+          # Copy index.html to 404.html so GitHub Pages serves the SPA for client-side routes
+          if [ -f apps/web/dist/index.html ]; then
+            cp apps/web/dist/index.html apps/web/dist/404.html
+            echo "Created apps/web/dist/404.html from index.html"
+          else
+            echo "No index.html found; cannot create 404.html" && exit 1
+          fi
+
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
