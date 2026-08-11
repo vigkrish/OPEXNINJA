@@ -1,0 +1,40 @@
+name: Run Prisma migrations (manual)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Validate PROD_DATABASE_URL secret
+        run: |
+          if [ -z "${{ secrets.PROD_DATABASE_URL }}" ]; then
+            echo "Set PROD_DATABASE_URL in repository secrets before running migrations."
+            exit 1
+          fi
+          echo "PROD_DATABASE_URL is present"
+
+      - name: Generate Prisma client
+        env:
+          DATABASE_URL: ${{ secrets.PROD_DATABASE_URL }}
+        run: npm -w @opexninja/api run db:generate
+
+      - name: Run Prisma migrations
+        env:
+          DATABASE_URL: ${{ secrets.PROD_DATABASE_URL }}
+        run: npx prisma migrate deploy --schema=apps/api/prisma/schema.prisma
