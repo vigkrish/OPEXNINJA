@@ -1,62 +1,95 @@
 # OPEX Ninja
 
-Operational Excellence Consulting and Transformation.
+**Operational Excellence Consulting and Transformation**
 
-## Commercial model
-
-1. **Quick Feasibility Check** — 3–10 day rapid diagnostic.
-2. **30-Day Transformation Sprint** — focused, measurable operational improvement.
-3. **Long-Term Surveillance & Optimization** — recurring audits, KPI reviews and continuous improvement.
-
-Core capabilities:
+OPEX Ninja helps organizations identify operational improvement opportunities, deliver focused transformation, and sustain performance across:
 
 - Process Excellence / Lean Six Sigma
 - SAP / ERP Transformation
 - Cybersecurity & Risk
 - ISO Certification Consulting & Implementation
 
+## Commercial model
+
+1. **Quick Feasibility Check** — 3–10 day rapid diagnostic.
+2. **30-Day Transformation Sprint** — focused, measurable operational improvement.
+3. **Long-Term Surveillance & Optimization** — recurring audits, KPI reviews and continuous improvement.
+4. **OPEXaaS** — ongoing operational excellence advisory and performance governance.
+
 ## Website
 
 The public website is in `apps/web`.
 
-### Local development
-
 ```bash
 npm install
 npm run dev:web
-```
-
-### Production build
-
-```bash
 npm run build:web
 ```
 
 ### GitHub Pages
 
-The included workflow deploys `apps/web/dist` to GitHub Pages on pushes to `main`.
+A GitHub Actions workflow at `.github/workflows/deploy.yml` builds `apps/web` and deploys it to GitHub Pages.
 
-If using a custom domain, change `VITE_BASE_PATH` to `/` in the workflow and Vite config, then add the custom domain through GitHub Pages settings.
+Expected initial URL:
 
-## Lead form
+`https://vigkrish.github.io/OPEXNINJA/`
 
-The website uses the existing API endpoint:
+The workflow uses:
+
+`VITE_BASE_PATH=/OPEXNINJA/`
+
+and the production API:
+
+`https://opexninja-api.onrender.com/api`
+
+For a custom domain, change `VITE_BASE_PATH` to `/` in the workflow/Vite configuration and update the canonical URL in `apps/web/index.html`.
+
+## API
+
+The Express API is in `apps/api`.
+
+```bash
+npm run dev:api
+npm run build:api
+```
+
+The API exposes:
+
+`GET /health`
 
 `POST /api/contact`
 
-Set `VITE_API_URL` in the deployment environment to the public API base URL, for example:
+Contact enquiries are stored through Prisma/PostgreSQL.
 
-`https://api.example.com/api`
+### Production API
 
-Do not commit secrets or private credentials.
+A Render Blueprint is included in `render.yaml`.
 
-## Before launch
+Deploy the blueprint to create:
 
-Replace the following placeholders in `apps/web/src/components/organisms/Footer.tsx`:
+- Web service: `opexninja-api`
+- PostgreSQL database: `opexninja-db`
 
-- `YOUR_EMAIL`
-- `YOUR_PHONE`
-- `YOUR_LOCATION`
-- `YOUR_LINKEDIN_URL`
+Required production environment:
 
-Also update the canonical/OG URLs in `apps/web/index.html` when the final domain is confirmed.
+- `DATABASE_URL` — supplied by Render
+- `CORS_ORIGIN` — set to the website origin
+- `NODE_ENV=production`
+
+## Contact
+
+**Email:** contactus.opexninja@gmail.com  
+**Phone:** +91 91768 16218  
+**Location:** Chennai, India  
+**LinkedIn:** Coming soon
+
+## Before custom-domain launch
+
+Update:
+
+- canonical URL in `apps/web/index.html`
+- Open Graph URL in `apps/web/index.html`
+- `VITE_BASE_PATH` from `/OPEXNINJA/` to `/`
+- `CORS_ORIGIN` on the API to include the custom domain
+
+Do not commit passwords, API keys, database credentials, or other secrets.

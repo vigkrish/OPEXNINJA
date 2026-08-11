@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: opexninja-api
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm -w @opexninja/api run db:generate && npm -w @opexninja/api run build
+    startCommand: npx prisma migrate deploy --schema apps/api/prisma/schema.prisma && npm -w @opexninja/api run start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: CORS_ORIGIN
+        value: https://vigkrish.github.io
+      - key: DATABASE_URL
+        fromDatabase:
+          name: opexninja-db
+          property: connectionString
+
+databases:
+  - name: opexninja-db
+    plan: free
