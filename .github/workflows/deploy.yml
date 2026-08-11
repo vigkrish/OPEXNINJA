@@ -50,6 +50,18 @@ jobs:
       - name: Build website
         run: npm run build:web
 
+      - name: Inspect built site
+        run: |
+          echo "Listing built files..."
+          ls -la apps/web/dist || true
+          echo "Index head (if present):"
+          if [ -f apps/web/dist/index.html ]; then
+            head -n 20 apps/web/dist/index.html
+          else
+            echo "No index.html found in apps/web/dist"
+            exit 1
+          fi
+
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
@@ -70,3 +82,8 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Print deployed Pages URL
+        run: |
+          echo "Deployed page URL: ${{ steps.deployment.outputs.page_url }}"
+          curl -I "${{ steps.deployment.outputs.page_url }}" || true
