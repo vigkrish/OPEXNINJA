@@ -1,81 +1,38 @@
+import { Menu, Moon, Sun, X } from 'lucide-react';
 import { useState } from 'react';
 import { Button } from '../atoms/Button';
 import { useTheme } from '@/context/ThemeContext';
-import { Menu, X, Moon, Sun } from 'lucide-react';
+
+const links = [
+  ['Services', '#services'],
+  ['Transformation', '#method'],
+  ['Industries', '#industries'],
+  ['Why OPEX Ninja', '#why'],
+];
 
 export const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [open, setOpen] = useState(false);
   const { isDark, setIsDark } = useTheme();
 
-  const navLinks = [
-    { label: 'Home', href: '/' },
-    { label: 'Services', href: '/#services' },
-    { label: 'About', href: '/about' },
-    { label: 'Contact', href: '/contact' },
-  ];
-
   return (
-    <nav className="sticky top-0 z-50 w-full bg-white/95 dark:bg-slate-950/95 backdrop-blur border-b border-slate-200 dark:border-slate-800 transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          {/* Logo */}
-          <div className="flex-shrink-0 font-bold text-2xl text-primary dark:text-secondary">
-            OPEX Ninja
-          </div>
-
-          {/* Desktop Menu */}
-          <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="text-neutral dark:text-slate-100 hover:text-secondary dark:hover:text-secondary transition-colors"
-              >
-                {link.label}
-              </a>
-            ))}
-          </div>
-
-          {/* Right Actions */}
-          <div className="flex items-center gap-4">
-            <button
-              onClick={() => setIsDark(!isDark)}
-              className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
-              aria-label="Toggle theme"
-            >
-              {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-            </button>
-            <Button variant="default" size="sm" className="hidden sm:inline-flex">
-              Book Demo
-            </Button>
-
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
-              aria-label="Toggle menu"
-            >
-              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
-          </div>
+    <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/90 backdrop-blur dark:border-slate-800 dark:bg-slate-950/90">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 lg:px-8">
+        <a href="#home" className="flex items-center gap-2 font-extrabold tracking-tight">
+          <span className="grid h-9 w-9 place-items-center rounded-xl bg-slate-950 text-sm text-orange-400">ON</span>
+          <span className="text-xl text-slate-950 dark:text-white">OPEX <span className="text-blue-600">Ninja</span></span>
+        </a>
+        <nav className="hidden items-center gap-7 md:flex">
+          {links.map(([label, href]) => <a key={label} href={href} className="text-sm font-medium text-slate-600 hover:text-blue-600 dark:text-slate-300">{label}</a>)}
+        </nav>
+        <div className="flex items-center gap-2">
+          <button onClick={() => setIsDark(!isDark)} className="rounded-lg p-2 text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800" aria-label="Toggle theme">
+            {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+          </button>
+          <Button variant="default" size="sm" className="hidden sm:inline-flex" onClick={() => window.location.hash = 'assessment'}>Free Health Check</Button>
+          <button onClick={() => setOpen(!open)} className="rounded-lg p-2 md:hidden" aria-label="Toggle navigation">{open ? <X /> : <Menu />}</button>
         </div>
-
-        {/* Mobile Menu */}
-        {isOpen && (
-          <div className="md:hidden py-4 border-t border-slate-200 dark:border-slate-800">
-            {navLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="block py-2 text-neutral dark:text-slate-100 hover:text-secondary transition-colors"
-                onClick={() => setIsOpen(false)}
-              >
-                {link.label}
-              </a>
-            ))}
-          </div>
-        )}
       </div>
-    </nav>
+      {open && <nav className="border-t border-slate-200 px-6 py-4 dark:border-slate-800 md:hidden">{links.map(([label, href]) => <a key={label} href={href} onClick={() => setOpen(false)} className="block py-3 font-medium">{label}</a>)}<a href="#assessment" onClick={() => setOpen(false)} className="block py-3 font-semibold text-blue-600">Free Health Check</a></nav>}
+    </header>
   );
 };

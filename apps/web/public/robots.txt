@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://vigkrish.github.io/OPEXNINJA/sitemap.xml

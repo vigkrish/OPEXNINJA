@@ -7,26 +7,20 @@ import { ThemeProvider } from './context/ThemeContext';
 function App() {
   const [isDark, setIsDark] = useState(() => {
     if (typeof window === 'undefined') return false;
-    return localStorage.getItem('theme') === 'dark' || 
-           window.matchMedia('(prefers-color-scheme: dark)').matches;
+    return localStorage.getItem('theme') === 'dark';
   });
 
   useEffect(() => {
     const root = document.documentElement;
-    if (isDark) {
-      root.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      root.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-    }
+    root.classList.toggle('dark', isDark);
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
   }, [isDark]);
 
   return (
     <ThemeProvider value={{ isDark, setIsDark }}>
-      <div className="min-h-screen flex flex-col bg-white dark:bg-slate-950 transition-colors duration-300">
+      <div className="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
         <Navbar />
-        <main className="flex-1">
+        <main>
           <Home />
         </main>
         <Footer />
