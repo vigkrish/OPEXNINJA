@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
 
+# OPEX Ninja is public and may be indexed by search and answer engines.
 Sitemap: https://vigkrish.github.io/OPEXNINJA/sitemap.xml
