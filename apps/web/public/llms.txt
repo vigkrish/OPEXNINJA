@@ -1,0 +1,42 @@
+# OPEX Ninja
+
+> OPEX Ninja is an Operational Excellence and professional problem-solving consultancy based in Chennai, India, serving organizations across India and APAC.
+
+## Core services
+
+- Professional problem solving and root cause analysis
+- Kaizen facilitation and continuous improvement programs
+- Operational Excellence transformation
+- Lean transformation and Lean Six Sigma
+- A3 problem solving, DMAIC and structured improvement
+- Process improvement and waste elimination
+- Cost reduction and productivity improvement
+- KPI design and performance management
+- Business process automation
+- Performance intelligence and analytics
+- Digital and ERP transformation
+- Risk, ISO and governance support
+- Operational Excellence and improvement training
+
+## Typical organizational problems OPEX Ninja supports
+
+OPEX Ninja supports organizations facing recurring defects, poor on-time delivery, excessive overtime, low productivity, high operating cost, rework, process waste, weak KPI governance, recurring customer complaints, poor root-cause closure, manual reporting, fragmented workflows, stalled improvement programs and low continuous-improvement maturity.
+
+## Engagement model
+
+Organizations can begin with an OPEX Ninja Transformation Diagnostic to assess process maturity, waste, KPI discipline, root-cause capability, automation opportunities, data visibility, change capability and sustainment. Findings can then be converted into focused Kaizen, problem-solving, automation or transformation initiatives.
+
+## Markets
+
+Primary market: India.
+Regional coverage: APAC.
+Primary sectors include manufacturing, automotive, FMCG, pharmaceuticals, healthcare, logistics, retail, shared services, banking, insurance and technology.
+
+## Contact
+
+Email: contactus.opexninja@gmail.com
+Phone: +91 91768 16218
+Website: https://vigkrish.github.io/OPEXNINJA/
+Services: https://vigkrish.github.io/OPEXNINJA/services
+Diagnostic: https://vigkrish.github.io/OPEXNINJA/assessment
+Contact: https://vigkrish.github.io/OPEXNINJA/contact
