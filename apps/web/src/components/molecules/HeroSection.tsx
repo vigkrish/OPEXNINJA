@@ -19,11 +19,11 @@ export const HeroSection = () => {
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
             Operational Excellence.
             <br />
-            <span className="text-accent">Powered by AI.</span>
+            <span className="text-accent">Built for measurable results.</span>
           </h1>
           <p className="text-xl text-slate-100 mb-8 max-w-2xl mx-auto">
-            Transform your business with AI-driven operational excellence. Lean transformation, continuous
-            improvement, and digital transformation that delivers results.
+            Transform your business through Lean transformation, continuous improvement, automation,
+            analytics and digital transformation that delivers results.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" variant="secondary" className="text-white">
