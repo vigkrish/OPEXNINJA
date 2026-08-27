@@ -7,6 +7,7 @@ import { ContentPage } from './pages/ContentPage';
 import { ResourcesPage } from './pages/ResourcesPage';
 import { DiagnosticPage } from './pages/DiagnosticPage';
 import { AdminConsole } from './pages/AdminConsole';
+import { MarketingStudio } from './pages/MarketingStudio';
 import { pageContent } from './content/siteContent';
 import { ThemeProvider } from './context/ThemeContext';
 
@@ -30,6 +31,7 @@ function App() {
   }, [isDark]);
 
   const path = typeof window !== 'undefined' ? normalizePath(window.location.pathname) : '';
+  const privatePage = path === 'admin' || path === 'admin/marketing';
 
   if (path === 'amazon') return <AmazonHub />;
 
@@ -38,14 +40,15 @@ function App() {
   if (path === 'resources') content = <ResourcesPage />;
   else if (path === 'assessment') content = <DiagnosticPage />;
   else if (path === 'admin') content = <AdminConsole />;
+  else if (path === 'admin/marketing') content = <MarketingStudio />;
   else if (page) content = <ContentPage {...page} />;
 
   return (
     <ThemeProvider value={{ isDark, setIsDark }}>
       <div className="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
-        {path !== 'admin' && <Navbar />}
+        {!privatePage && <Navbar />}
         <main>{content}</main>
-        {path !== 'admin' && <Footer />}
+        {!privatePage && <Footer />}
       </div>
     </ThemeProvider>
   );
