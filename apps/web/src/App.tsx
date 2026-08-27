@@ -6,6 +6,7 @@ import { AmazonHub } from './pages/AmazonHub';
 import { ContentPage } from './pages/ContentPage';
 import { ResourcesPage } from './pages/ResourcesPage';
 import { DiagnosticPage } from './pages/DiagnosticPage';
+import { AdminConsole } from './pages/AdminConsole';
 import { pageContent } from './content/siteContent';
 import { ThemeProvider } from './context/ThemeContext';
 
@@ -30,23 +31,21 @@ function App() {
 
   const path = typeof window !== 'undefined' ? normalizePath(window.location.pathname) : '';
 
-  if (path === 'amazon') {
-    return <AmazonHub />;
-  }
+  if (path === 'amazon') return <AmazonHub />;
 
   const page = path ? pageContent[path] : undefined;
-
   let content = <HomeRelaunch />;
   if (path === 'resources') content = <ResourcesPage />;
   else if (path === 'assessment') content = <DiagnosticPage />;
+  else if (path === 'admin') content = <AdminConsole />;
   else if (page) content = <ContentPage {...page} />;
 
   return (
     <ThemeProvider value={{ isDark, setIsDark }}>
       <div className="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
-        <Navbar />
+        {path !== 'admin' && <Navbar />}
         <main>{content}</main>
-        <Footer />
+        {path !== 'admin' && <Footer />}
       </div>
     </ThemeProvider>
   );
