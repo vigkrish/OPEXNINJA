@@ -4,6 +4,8 @@ import { Footer } from './components/organisms/Footer';
 import { HomeRelaunch } from './pages/HomeRelaunch';
 import { AmazonHub } from './pages/AmazonHub';
 import { ContentPage } from './pages/ContentPage';
+import { ResourcesPage } from './pages/ResourcesPage';
+import { DiagnosticPage } from './pages/DiagnosticPage';
 import { pageContent } from './content/siteContent';
 import { ThemeProvider } from './context/ThemeContext';
 
@@ -34,11 +36,16 @@ function App() {
 
   const page = path ? pageContent[path] : undefined;
 
+  let content = <HomeRelaunch />;
+  if (path === 'resources') content = <ResourcesPage />;
+  else if (path === 'assessment') content = <DiagnosticPage />;
+  else if (page) content = <ContentPage {...page} />;
+
   return (
     <ThemeProvider value={{ isDark, setIsDark }}>
       <div className="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
         <Navbar />
-        <main>{page ? <ContentPage {...page} /> : <HomeRelaunch />}</main>
+        <main>{content}</main>
         <Footer />
       </div>
     </ThemeProvider>
