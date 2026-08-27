@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://vigkrish.github.io/OPEXNINJA/</loc>
-  </url>
+  <url><loc>https://vigkrish.github.io/OPEXNINJA/</loc></url>
+  <url><loc>https://vigkrish.github.io/OPEXNINJA/about</loc></url>
+  <url><loc>https://vigkrish.github.io/OPEXNINJA/services</loc></url>
+  <url><loc>https://vigkrish.github.io/OPEXNINJA/industries</loc></url>
+  <url><loc>https://vigkrish.github.io/OPEXNINJA/case-studies</loc></url>
+  <url><loc>https://vigkrish.github.io/OPEXNINJA/resources</loc></url>
+  <url><loc>https://vigkrish.github.io/OPEXNINJA/contact</loc></url>
+  <url><loc>https://vigkrish.github.io/OPEXNINJA/assessment</loc></url>
 </urlset>

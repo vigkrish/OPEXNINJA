@@ -1,6 +1,7 @@
 import { Mail, MapPin, Phone } from 'lucide-react';
 
 const siteBase = import.meta.env.BASE_URL;
+const toSite = (path = '') => `${siteBase}${path}`;
 
 export const Footer = () => (
   <footer className="bg-slate-950 text-slate-300">
@@ -11,20 +12,22 @@ export const Footer = () => (
             OPEX <span className="text-blue-400">Ninja</span>
           </div>
           <p className="mt-4 max-w-md leading-7">
-            Operational excellence consulting for organizations that want measurable improvement and sustainable control.
+            Operational Excellence. Powered by AI. Helping organizations reduce waste, automate intelligently and build stronger management systems.
           </p>
           <p className="mt-6 text-sm text-slate-500">
-            Process Excellence · SAP / ERP · Cybersecurity · ISO
+            Operational Excellence · AI & Automation · Performance Intelligence · Digital Transformation
           </p>
         </div>
 
         <div>
           <h3 className="font-semibold text-white">Explore</h3>
           <div className="mt-4 space-y-3 text-sm">
-            <a href="#services" className="block hover:text-white">Services</a>
-            <a href="#method" className="block hover:text-white">Transformation Model</a>
-            <a href="#industries" className="block hover:text-white">Industries</a>
-            <a href="#assessment" className="block hover:text-white">Free Health Check</a>
+            <a href={toSite('about')} className="block hover:text-white">About</a>
+            <a href={toSite('services')} className="block hover:text-white">Services</a>
+            <a href={toSite('industries')} className="block hover:text-white">Industries</a>
+            <a href={toSite('case-studies')} className="block hover:text-white">Case Studies</a>
+            <a href={toSite('resources')} className="block hover:text-white">Resources</a>
+            <a href={toSite('assessment')} className="block hover:text-white">Transformation Diagnostic</a>
             <a href={`${siteBase}privacy.html`} className="block hover:text-white">Privacy Policy</a>
             <a href={`${siteBase}terms.html`} className="block hover:text-white">Terms of Use</a>
           </div>
@@ -45,9 +48,6 @@ export const Footer = () => (
               <MapPin className="h-5 w-5 text-blue-400" />
               Chennai, India
             </div>
-            <div className="pt-1 text-xs text-slate-500">
-              LinkedIn profile coming soon.
-            </div>
           </div>
         </div>
       </div>
@@ -55,7 +55,7 @@ export const Footer = () => (
       <div className="mt-12 border-t border-white/10 pt-6 text-sm text-slate-500">
         <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
           <span>© {new Date().getFullYear()} OPEX Ninja. All rights reserved.</span>
-          <span>Operational Excellence · Digital Transformation · Assurance</span>
+          <span>Lean Thinking · Automation · AI · Analytics</span>
         </div>
       </div>
     </div>
