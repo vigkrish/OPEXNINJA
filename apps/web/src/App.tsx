@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Navbar } from './components/organisms/Navbar';
 import { Footer } from './components/organisms/Footer';
-import { Home } from './pages/Home';
+import { HomeRelaunch } from './pages/HomeRelaunch';
 import { AmazonHub } from './pages/AmazonHub';
 import { ContentPage } from './pages/ContentPage';
 import { pageContent } from './content/siteContent';
@@ -38,7 +38,7 @@ function App() {
     <ThemeProvider value={{ isDark, setIsDark }}>
       <div className="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
         <Navbar />
-        <main>{page ? <ContentPage {...page} /> : <Home />}</main>
+        <main>{page ? <ContentPage {...page} /> : <HomeRelaunch />}</main>
         <Footer />
       </div>
     </ThemeProvider>
