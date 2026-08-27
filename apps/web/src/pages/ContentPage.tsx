@@ -13,6 +13,9 @@ export type ContentPageProps = {
   ctaText?: string;
 };
 
+const siteBase = import.meta.env.BASE_URL;
+const homeAssessment = `${siteBase}#assessment`;
+
 export function ContentPage({ eyebrow, title, intro, sections, ctaTitle, ctaText }: ContentPageProps) {
   return (
     <>
@@ -21,7 +24,7 @@ export function ContentPage({ eyebrow, title, intro, sections, ctaTitle, ctaText
           <p className="font-semibold uppercase tracking-[.2em] text-orange-400">{eyebrow}</p>
           <h1 className="mt-4 max-w-4xl text-4xl font-extrabold tracking-tight sm:text-6xl">{title}</h1>
           <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-300">{intro}</p>
-          <a href="/#assessment" className="mt-8 inline-flex items-center gap-2 rounded-xl bg-orange-500 px-6 py-3.5 font-semibold text-white transition hover:bg-orange-400">
+          <a href={homeAssessment} className="mt-8 inline-flex items-center gap-2 rounded-xl bg-orange-500 px-6 py-3.5 font-semibold text-white transition hover:bg-orange-400">
             Book a Discovery Call <ArrowRight className="h-5 w-5" />
           </a>
         </div>
@@ -54,7 +57,7 @@ export function ContentPage({ eyebrow, title, intro, sections, ctaTitle, ctaText
           <p className="mx-auto mt-4 max-w-2xl leading-7 text-slate-600 dark:text-slate-300">
             {ctaText ?? 'We begin with evidence, quantify the opportunity, and recommend the smallest practical intervention that can create measurable value.'}
           </p>
-          <a href="/#assessment" className="mt-7 inline-flex items-center gap-2 font-semibold text-blue-600">
+          <a href={homeAssessment} className="mt-7 inline-flex items-center gap-2 font-semibold text-blue-600">
             Start the OPEX Ninja Diagnostic <ArrowRight className="h-5 w-5" />
           </a>
         </div>
