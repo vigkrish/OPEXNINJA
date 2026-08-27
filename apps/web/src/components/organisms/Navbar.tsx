@@ -6,8 +6,9 @@ import { useTheme } from '@/context/ThemeContext';
 const links = [
   ['About', 'about'],
   ['Services', 'services'],
-  ['Industries', 'industries'],
-  ['Case Studies', 'case-studies'],
+  ['Problem Solving', 'problem-solving-consultant-india'],
+  ['Kaizen', 'kaizen-consultant-india'],
+  ['Training', 'root-cause-analysis-training'],
   ['Resources', 'resources'],
 ];
 
@@ -25,7 +26,7 @@ export const Navbar = () => {
           <span className="grid h-9 w-9 place-items-center rounded-xl bg-slate-950 text-sm text-orange-400">ON</span>
           <span className="text-xl text-slate-950 dark:text-white">OPEX <span className="text-blue-600">Ninja</span></span>
         </a>
-        <nav className="hidden items-center gap-6 md:flex">
+        <nav className="hidden items-center gap-5 md:flex">
           {links.map(([label, path]) => <a key={label} href={toSite(path)} className="text-sm font-medium text-slate-600 hover:text-blue-600 dark:text-slate-300">{label}</a>)}
         </nav>
         <div className="flex items-center gap-2">
@@ -39,6 +40,8 @@ export const Navbar = () => {
       {open && (
         <nav className="border-t border-slate-200 px-6 py-4 dark:border-slate-800 md:hidden">
           {links.map(([label, path]) => <a key={label} href={toSite(path)} onClick={() => setOpen(false)} className="block py-3 font-medium">{label}</a>)}
+          <a href={toSite('operational-excellence-consultant-india')} onClick={() => setOpen(false)} className="block py-3 font-medium">Operational Excellence</a>
+          <a href={toSite('continuous-improvement-consultant-india')} onClick={() => setOpen(false)} className="block py-3 font-medium">Continuous Improvement</a>
           <a href={toSite('assessment')} onClick={() => setOpen(false)} className="block py-3 font-semibold text-blue-600">Start Diagnostic</a>
           <a href={toSite('contact')} onClick={() => setOpen(false)} className="block py-3 font-semibold text-orange-500">Book Discovery Call</a>
         </nav>
