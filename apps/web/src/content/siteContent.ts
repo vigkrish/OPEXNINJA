@@ -1,87 +1,14 @@
 import type { ContentPageProps } from '@/pages/ContentPage';
 
 export const pageContent: Record<string, ContentPageProps> = {
-  about: {
-    eyebrow: 'About OPEX Ninja',
-    title: 'Operational Excellence with practical AI and automation.',
-    intro: 'OPEX Ninja helps organizations improve the way work gets done by combining Lean thinking, continuous improvement, digital transformation, analytics and responsible AI adoption.',
-    sections: [
-      { title: 'Our Mission', text: 'Help organizations remove operational friction, improve control and build scalable ways of working that deliver measurable business outcomes.' },
-      { title: 'How We Work', text: 'We start small, validate the opportunity, prioritize by impact and feasibility, then support implementation and sustainment.', bullets: ['Evidence before assumptions', 'Business outcomes before tools', 'Practical change before transformation theatre'] },
-      { title: 'What Makes Us Different', text: 'Our model combines operational excellence with technology execution instead of treating Lean, analytics, automation and AI as separate programs.' },
-      { title: 'Where We Add Value', text: 'Complex operations, manual workflows, KPI gaps, ERP change, compliance pressure and teams that need a more disciplined improvement system.' },
-    ],
-  },
-  services: {
-    eyebrow: 'Services',
-    title: 'Consulting services designed around measurable outcomes.',
-    intro: 'Engagements are structured to help organizations diagnose performance gaps, improve processes, automate repetitive work and build stronger management systems.',
-    sections: [
-      { title: 'Operational Excellence', text: 'Lean transformation, Kaizen, value stream mapping, process redesign, cost reduction, productivity improvement and KPI systems.', bullets: ['Operational diagnostics', 'Kaizen facilitation', 'Process redesign', 'Performance management'] },
-      { title: 'AI & Automation', text: 'AI readiness, business use-case prioritization, Microsoft Copilot adoption and workflow automation that complements existing operations.', bullets: ['AI opportunity assessment', 'Power Automate', 'Copilot adoption', 'Workflow redesign'] },
-      { title: 'Performance Intelligence', text: 'Management reporting, KPI architecture, Power BI dashboards and analytics that make operational performance easier to understand and act on.', bullets: ['KPI architecture', 'Power BI', 'Executive dashboards', 'Operational analytics'] },
-      { title: 'Digital & ERP Transformation', text: 'Process digitization, SAP/ERP readiness, transformation assurance and workflow redesign to improve technology value realization.' },
-      { title: 'Risk, ISO & Governance', text: 'Risk reviews, governance, management systems, ISO readiness, internal audits and control improvement.' },
-      { title: 'Training & Capability Building', text: 'Lean, Kaizen, root cause analysis, problem solving, AI for business, Power BI and change management workshops.' },
-    ],
-  },
-  industries: {
-    eyebrow: 'Industries',
-    title: 'Built for operations where complexity creates hidden cost.',
-    intro: 'OPEX Ninja is suited to organizations with process complexity, cross-functional handoffs, manual work, ERP dependencies, compliance requirements or pressure to improve productivity.',
-    sections: [
-      { title: 'Manufacturing & Industrial', text: 'Manufacturing, automotive components, electronics, packaging and process-intensive operations.', bullets: ['Cycle-time reduction', 'Quality improvement', 'Capacity and productivity', 'Digital shop-floor workflows'] },
-      { title: 'FMCG & Pharmaceuticals', text: 'Operational improvement for regulated and high-volume environments where quality, speed and control matter simultaneously.' },
-      { title: 'Shared Services & BPO', text: 'Reduce manual effort, improve service levels, strengthen KPI governance and identify automation opportunities.' },
-      { title: 'Banking, Insurance & Technology', text: 'Process optimization, controls, analytics, automation and AI enablement for service-intensive functions.' },
-    ],
-  },
-  'case-studies': {
-    eyebrow: 'Case Studies',
-    title: 'Evidence-led transformation, documented responsibly.',
-    intro: 'This section is being prepared using anonymized and client-approved examples. We do not publish customer names, testimonials or savings figures without permission.',
-    sections: [
-      { title: 'Operational Improvement', text: 'Case-study format: challenge, baseline, root cause, intervention, measurable outcome and sustainment approach.' },
-      { title: 'Automation & Analytics', text: 'Examples will show how workflow redesign, dashboards and automation reduce manual effort and improve management visibility.' },
-      { title: 'Transformation Assurance', text: 'Examples will cover ERP, risk, ISO and governance interventions where stronger controls improve implementation confidence.' },
-      { title: 'Have a Similar Challenge?', text: 'Start with a discovery conversation and we will determine whether a diagnostic or focused sprint is appropriate.' },
-    ],
-  },
-  resources: {
-    eyebrow: 'Resources',
-    title: 'Practical tools for better operations.',
-    intro: 'The OPEX Ninja resource center will contain concise guides, templates and insights on continuous improvement, AI, automation and performance management.',
-    sections: [
-      { title: 'Operational Excellence', text: 'Kaizen, Lean, root cause analysis, KPI design, process mapping and continuous improvement guidance.' },
-      { title: 'AI for Operations', text: 'Practical AI adoption, responsible use, business use cases, Copilot and AI-readiness guidance.' },
-      { title: 'Automation & Analytics', text: 'Power Automate, Power BI, Excel automation and digital workflow insights.' },
-      { title: 'Templates & Diagnostics', text: 'Future downloadable assessment tools, checklists and improvement templates will be made available here.' },
-    ],
-  },
-  contact: {
-    eyebrow: 'Contact',
-    title: 'Start with one operational challenge.',
-    intro: 'Tell us where performance is being lost, work is too manual, controls are weak or technology is not delivering enough value. We will help identify the most practical next step.',
-    sections: [
-      { title: 'Discovery Call', text: 'A focused conversation to understand the business problem, expected outcome, urgency and current constraints.' },
-      { title: 'Transformation Diagnostic', text: 'Where appropriate, the next step is a structured diagnostic covering process efficiency, KPI maturity, automation potential and AI readiness.' },
-      { title: 'Engagement Options', text: 'Typical delivery models include focused assessments, Kaizen sprints, implementation projects, training and longer-term advisory support.' },
-      { title: 'What to Prepare', text: 'A short description of the challenge, affected process, approximate scale and what success would look like.' },
-    ],
-    ctaTitle: 'Ready to discuss your challenge?',
-    ctaText: 'Use the diagnostic form on the homepage to request a discovery conversation with OPEX Ninja.',
-  },
-  assessment: {
-    eyebrow: 'OPEX Ninja Diagnostic',
-    title: 'Find the highest-value improvement opportunities first.',
-    intro: 'The OPEX Ninja Transformation Diagnostic is designed to identify operational waste, KPI gaps, automation opportunities and practical AI use cases before committing to a larger program.',
-    sections: [
-      { title: '1. Process Efficiency', text: 'Assess delays, rework, handoffs, bottlenecks, standardization gaps and waste.' },
-      { title: '2. Cost & Performance', text: 'Review KPI maturity, cost visibility, service levels, capacity and management routines.' },
-      { title: '3. Automation Potential', text: 'Identify repetitive work, rule-based tasks, manual reporting and workflow friction suitable for automation.' },
-      { title: '4. AI Readiness', text: 'Identify realistic AI use cases, data dependencies, governance needs and adoption risks.' },
-      { title: '5. Prioritized Roadmap', text: 'Rank opportunities by impact, feasibility, risk and implementation effort and translate them into a 90-day action plan.' },
-      { title: 'Typical Output', text: 'An executive summary, opportunity map, prioritized initiatives, indicative impact and recommended next steps.' },
-    ],
-  },
+  about: { eyebrow:'About OPEX Ninja', title:'Operational Excellence with practical AI and automation.', intro:'OPEX Ninja helps organizations improve the way work gets done by combining Lean thinking, continuous improvement, digital transformation, analytics and responsible AI adoption.', sections:[{title:'Our Mission',text:'Help organizations remove operational friction, improve control and build scalable ways of working that deliver measurable business outcomes.'},{title:'How We Work',text:'We start small, validate the opportunity, prioritize by impact and feasibility, then support implementation and sustainment.',bullets:['Evidence before assumptions','Business outcomes before tools','Practical change before transformation theatre']},{title:'What Makes Us Different',text:'Our model combines operational excellence with technology execution instead of treating Lean, analytics, automation and AI as separate programs.'},{title:'Where We Add Value',text:'Complex operations, manual workflows, KPI gaps, ERP change, compliance pressure and teams that need a more disciplined improvement system.'}]},
+  services: { eyebrow:'Services', title:'Consulting services designed around measurable outcomes.', intro:'Engagements help organizations diagnose performance gaps, solve recurring problems, improve processes, automate repetitive work and build stronger management systems.', sections:[{title:'Operational Excellence',text:'Lean transformation, Kaizen, value stream mapping, process redesign, cost reduction, productivity improvement and KPI systems.',bullets:['Operational diagnostics','Kaizen facilitation','Process redesign','Performance management']},{title:'Professional Problem Solving',text:'Facilitated root cause analysis, A3 problem solving, 5 Why, corrective-action design and cross-functional problem solving for persistent organizational issues.'},{title:'AI & Automation',text:'AI readiness, business use-case prioritization, Microsoft Copilot adoption and workflow automation that complements existing operations.'},{title:'Performance Intelligence',text:'KPI architecture, Power BI dashboards and operational analytics.'},{title:'Digital & ERP Transformation',text:'Process digitization, SAP/ERP readiness, transformation assurance and workflow redesign.'},{title:'Risk, ISO & Governance',text:'Risk reviews, governance, management systems, ISO readiness and control improvement.'},{title:'Training & Capability Building',text:'Lean, Kaizen, root cause analysis, structured problem solving, AI for business, Power BI and change management workshops.'}]},
+  industries:{eyebrow:'Industries',title:'Built for operations where complexity creates hidden cost.',intro:'OPEX Ninja supports organizations with process complexity, cross-functional handoffs, recurring problems, manual work, ERP dependencies or productivity pressure.',sections:[{title:'Manufacturing & Industrial',text:'Manufacturing, automotive components, electronics, packaging and process-intensive operations.',bullets:['Cycle-time reduction','Quality improvement','Capacity and productivity','Problem solving and Kaizen']},{title:'FMCG & Pharmaceuticals',text:'Operational improvement for regulated and high-volume environments where quality, speed and control matter simultaneously.'},{title:'Shared Services & BPO',text:'Reduce manual effort, improve service levels, strengthen KPI governance and solve recurring process failures.'},{title:'Banking, Insurance & Technology',text:'Process optimization, controls, analytics, automation and structured improvement for service-intensive functions.'}]},
+  'case-studies':{eyebrow:'Case Studies',title:'Evidence-led transformation, documented responsibly.',intro:'This section is being prepared using anonymized and client-approved examples. We do not publish customer names, testimonials or savings figures without permission.',sections:[{title:'Operational Improvement',text:'Case-study format: challenge, baseline, root cause, intervention, measurable outcome and sustainment approach.'},{title:'Automation & Analytics',text:'Examples will show how workflow redesign, dashboards and automation reduce manual effort and improve management visibility.'},{title:'Transformation Assurance',text:'Examples will cover ERP, risk, ISO and governance interventions where stronger controls improve implementation confidence.'},{title:'Have a Similar Challenge?',text:'Start with a discovery conversation and we will determine whether a diagnostic or focused sprint is appropriate.'}]},
+  contact:{eyebrow:'Contact',title:'Start with one operational challenge.',intro:'Tell us where performance is being lost, recurring problems are consuming management time, work is too manual or improvement initiatives are stalled.',sections:[{title:'Discovery Call',text:'A focused conversation to understand the business problem, expected outcome, urgency and current constraints.'},{title:'Transformation Diagnostic',text:'A structured diagnostic covering process efficiency, problem-solving maturity, KPI discipline and improvement opportunities.'},{title:'Engagement Options',text:'Focused assessments, Kaizen sprints, facilitated problem solving, implementation projects, training and advisory support.'}],ctaTitle:'Ready to discuss your challenge?',ctaText:'Use the diagnostic to request a discovery conversation with OPEX Ninja.'},
+  'problem-solving-consultant-india':{eyebrow:'Professional Problem Solving · India',title:'Professional problem-solving support for complex organizational problems.',intro:'When recurring problems survive meetings, action trackers and repeated corrective actions, OPEX Ninja provides structured facilitation to define the problem, isolate root causes, test countermeasures and build sustainable controls.',sections:[{title:'Problems We Help Solve',text:'Recurring quality failures, productivity losses, missed service levels, rework, customer complaints, cross-functional breakdowns, capacity constraints and persistent operational defects.'},{title:'Structured Methods',text:'A3 thinking, DMAIC, 5 Why, fishbone analysis, Pareto analysis, process mapping, data stratification, cause validation and corrective-action planning.'},{title:'Organization-Level Facilitation',text:'We bring stakeholders together around evidence, separate symptoms from causes and establish owners, measures and follow-up routines.'},{title:'Expected Outcome',text:'A clearly defined problem, evidence-based root causes, prioritized countermeasures, measurable success criteria and a sustainment plan.'}],ctaTitle:'Have a problem that keeps returning?',ctaText:'Start the OPEX Ninja diagnostic or request a focused problem-solving session.'},
+  'kaizen-consultant-india':{eyebrow:'Kaizen Consulting · India',title:'Kaizen facilitation that turns improvement ideas into measurable results.',intro:'OPEX Ninja designs and facilitates focused Kaizen initiatives for organizations that need faster improvement across quality, cost, delivery, productivity and employee involvement.',sections:[{title:'Kaizen Events',text:'Structured preparation, current-state analysis, waste identification, root cause analysis, future-state design, implementation planning and management readout.'},{title:'Typical Focus Areas',text:'Lead time, rework, process handoffs, standard work, capacity, quality loss, reporting effort, service levels and workflow waste.'},{title:'Kaizen Governance',text:'Build an improvement pipeline, prioritization model, benefits tracking and 30/60/90/180-day sustainment reviews.'},{title:'Capability Building',text:'Coach managers and teams in Kaizen thinking so improvement continues after the facilitated event.'}],ctaTitle:'Planning an improvement initiative?',ctaText:'Discuss your Kaizen opportunity with OPEX Ninja.'},
+  'root-cause-analysis-training':{eyebrow:'Problem Solving Training',title:'Root Cause Analysis and structured problem-solving training for teams.',intro:'Practical training for managers, CI teams, quality teams and operational leaders who need to move beyond symptoms and develop stronger corrective actions.',sections:[{title:'Core Skills',text:'Problem definition, data collection, Pareto thinking, 5 Why, fishbone analysis, cause-and-effect reasoning, cause validation and countermeasure selection.'},{title:'Applied Learning',text:'Training is designed around realistic operational scenarios and can be adapted to participant problems where appropriate.'},{title:'For Organizations',text:'Suitable for manufacturing, services, shared services, quality, supply chain and cross-functional improvement teams.'},{title:'Outcome',text:'Teams leave with a repeatable problem-solving structure and practical tools they can apply immediately.'}],ctaTitle:'Build stronger problem solvers.',ctaText:'Contact OPEX Ninja about an organizational RCA workshop.'},
+  'continuous-improvement-consultant-india':{eyebrow:'Continuous Improvement · India',title:'Build a continuous improvement system that produces sustained business results.',intro:'OPEX Ninja helps organizations move from isolated improvement projects to a governed pipeline of measurable initiatives linked to business priorities.',sections:[{title:'CI Operating System',text:'Opportunity identification, project selection, governance, cadence, benefits validation, escalation and sustainment.'},{title:'Leadership Visibility',text:'Create practical scorecards and review routines so management can see pipeline health, impact, blockers and sustainability.'},{title:'Methods',text:'Lean, Kaizen, A3, DMAIC, process mapping, KPI management and structured problem solving are applied according to the problem rather than as rituals.'},{title:'Capability',text:'Develop internal facilitators, managers and improvement champions through coaching and hands-on delivery.'}],ctaTitle:'Strengthen your improvement pipeline.',ctaText:'Start with an OPEX Ninja maturity diagnostic.'},
+  'operational-excellence-consultant-india':{eyebrow:'Operational Excellence · India',title:'Operational Excellence consulting for productivity, quality, cost and delivery improvement.',intro:'OPEX Ninja works with organizations to identify performance losses, improve management systems and execute focused transformations that deliver measurable operational outcomes.',sections:[{title:'Operational Diagnostic',text:'Assess process performance, waste, KPI maturity, management routines, problem solving and improvement capability.'},{title:'Focused Transformation',text:'Prioritize the few interventions most likely to improve quality, cost, delivery, productivity or customer experience.'},{title:'Execution',text:'Support Kaizen, process redesign, standard work, performance management, analytics and automation.'},{title:'Sustainment',text:'Establish ownership, metrics, control plans and follow-up routines to protect gains.'}],ctaTitle:'Looking for an Operational Excellence partner?',ctaText:'Start with a focused diagnostic.'},
 };
