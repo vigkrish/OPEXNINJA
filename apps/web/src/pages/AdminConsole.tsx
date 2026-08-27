@@ -1,1 +1,75 @@
-// placeholder
+import { useEffect, useMemo, useState } from 'react';
+import { ExternalLink, LogOut, RefreshCw, Search, ShieldCheck } from 'lucide-react';
+
+const SUPABASE_URL = 'https://gibwltoooekmqckpoghu.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_y3QKGkpDoBytRtDcpojzTQ_K2Ow3y6M';
+const SESSION_KEY = 'opexAdminSession';
+
+type Status = 'new' | 'reviewed' | 'contacted' | 'qualified' | 'won' | 'lost';
+type Lead = {
+  id: string; organization: string; industry: string | null; location: string | null;
+  trigger_event: string; problem_description: string; recommended_pitch: string | null;
+  contact_name: string | null; contact_title: string | null; contact_channel: string | null;
+  source_url: string | null; source_date: string | null; priority: 'high' | 'medium' | 'low';
+  status: Status; lead_score: number; discovered_at: string;
+};
+
+async function rpc<T>(name: string, body: Record<string, unknown>): Promise<T> {
+  const r = await fetch(`${SUPABASE_URL}/rest/v1/rpc/${name}`, { method: 'POST', headers: { 'Content-Type': 'application/json', apikey: SUPABASE_KEY }, body: JSON.stringify(body) });
+  if (!r.ok) throw new Error(`Request failed (${r.status})`);
+  return r.json() as Promise<T>;
+}
+
+export function AdminConsole() {
+  const [token, setToken] = useState(() => localStorage.getItem(SESSION_KEY) || '');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [loginError, setLoginError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [leads, setLeads] = useState<Lead[]>([]);
+  const [query, setQuery] = useState('');
+  const [filter, setFilter] = useState<'all' | Status>('all');
+
+  async function load(sessionToken = token) {
+    if (!sessionToken) return;
+    setLoading(true);
+    try { setLeads(await rpc<Lead[]>('admin_get_leads', { p_token: sessionToken })); }
+    catch { localStorage.removeItem(SESSION_KEY); setToken(''); setLeads([]); }
+    finally { setLoading(false); }
+  }
+
+  useEffect(() => { if (token) void load(token); }, [token]);
+
+  async function login(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault(); setLoginError(''); setLoading(true);
+    try {
+      const result = await rpc<{ success: boolean; token?: string }>('admin_login', { p_username: username, p_password: password });
+      if (!result.success || !result.token) { setLoginError('Invalid username or password.'); return; }
+      localStorage.setItem(SESSION_KEY, result.token); setToken(result.token); setPassword('');
+    } catch { setLoginError('Login service is unavailable.'); }
+    finally { setLoading(false); }
+  }
+
+  async function logout() {
+    try { if (token) await rpc('admin_logout', { p_token: token }); } catch { /* ignore */ }
+    localStorage.removeItem(SESSION_KEY); setToken(''); setLeads([]);
+  }
+
+  async function setStatus(id: string, status: Status) {
+    await rpc('admin_update_lead_status', { p_token: token, p_lead_id: id, p_status: status });
+    setLeads(v => v.map(l => l.id === id ? { ...l, status } : l));
+  }
+
+  const visible = useMemo(() => {
+    const q = query.toLowerCase().trim();
+    return leads.filter(l => (filter === 'all' || l.status === filter) && (!q || [l.organization,l.industry,l.location,l.trigger_event,l.problem_description,l.contact_name,l.contact_title].filter(Boolean).some(v => String(v).toLowerCase().includes(q))));
+  }, [leads, query, filter]);
+
+  if (!token) return <section className="min-h-[80vh] bg-slate-950 px-6 py-24 text-white"><div className="mx-auto max-w-md rounded-3xl border border-white/10 bg-white/[.06] p-8"><ShieldCheck className="h-10 w-10 text-blue-400" /><h1 className="mt-6 text-3xl font-extrabold">OPEX Ninja Admin</h1><p className="mt-2 text-slate-400">Secure lead intelligence console.</p><form onSubmit={login} className="mt-8 space-y-5"><label className="block text-sm">Username<input required autoComplete="username" value={username} onChange={e=>setUsername(e.target.value)} className="mt-2 w-full rounded-xl border border-white/15 bg-slate-900 px-4 py-3" /></label><label className="block text-sm">Password<input required autoComplete="current-password" type="password" value={password} onChange={e=>setPassword(e.target.value)} className="mt-2 w-full rounded-xl border border-white/15 bg-slate-900 px-4 py-3" /></label><button disabled={loading} className="w-full rounded-xl bg-blue-600 px-5 py-3 font-semibold">{loading?'Signing in…':'Sign in'}</button>{loginError&&<p className="text-sm text-red-400">{loginError}</p>}</form></div></section>;
+
+  const newCount = leads.filter(l=>l.status==='new').length;
+  const highCount = leads.filter(l=>l.priority==='high').length;
+  const avgScore = leads.length ? Math.round(leads.reduce((s,l)=>s+l.lead_score,0)/leads.length) : 0;
+
+  return <section className="min-h-screen bg-slate-100 px-4 py-10 dark:bg-slate-950 sm:px-6"><div className="mx-auto max-w-7xl"><div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between"><div><p className="font-semibold uppercase tracking-[.2em] text-orange-500">Private workspace</p><h1 className="mt-2 text-4xl font-extrabold">Lead Intelligence Console</h1><p className="mt-2 text-slate-600 dark:text-slate-300">Potential India consulting opportunities mapped to OPEX Ninja.</p></div><div className="flex gap-2"><button onClick={()=>void load()} className="inline-flex items-center gap-2 rounded-xl border bg-white px-4 py-2 text-sm font-semibold dark:bg-slate-900"><RefreshCw className={`h-4 w-4 ${loading?'animate-spin':''}`} />Refresh</button><button onClick={()=>void logout()} className="inline-flex items-center gap-2 rounded-xl bg-slate-950 px-4 py-2 text-sm font-semibold text-white"><LogOut className="h-4 w-4" />Log out</button></div></div><div className="mt-8 grid gap-4 sm:grid-cols-3">{[['New leads',newCount],['High priority',highCount],['Avg. score',`${avgScore}/100`]].map(([a,b])=><div key={String(a)} className="rounded-2xl border bg-white p-6 dark:border-slate-800 dark:bg-slate-900"><div className="text-3xl font-extrabold">{String(b)}</div><div className="mt-1 text-sm text-slate-500">{String(a)}</div></div>)}</div><div className="mt-8 flex flex-col gap-3 rounded-2xl border bg-white p-4 dark:border-slate-800 dark:bg-slate-900 sm:flex-row"><div className="relative flex-1"><Search className="absolute left-3 top-3.5 h-4 w-4 text-slate-400" /><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Search organization, problem, contact or industry…" className="w-full rounded-xl border py-3 pl-10 pr-4 dark:border-slate-700 dark:bg-slate-950" /></div><select value={filter} onChange={e=>setFilter(e.target.value as 'all'|Status)} className="rounded-xl border px-4 py-3 dark:border-slate-700 dark:bg-slate-950"><option value="all">All statuses</option><option value="new">New</option><option value="reviewed">Reviewed</option><option value="contacted">Contacted</option><option value="qualified">Qualified</option><option value="won">Won</option><option value="lost">Lost</option></select></div><div className="mt-6 space-y-5">{visible.map(l=><article key={l.id} className="rounded-3xl border bg-white p-6 dark:border-slate-800 dark:bg-slate-900"><div className="flex flex-col gap-5 lg:flex-row lg:justify-between"><div className="flex-1"><div className="flex gap-2"><span className={`rounded-full px-3 py-1 text-xs font-bold uppercase ${l.priority==='high'?'bg-red-100 text-red-700':l.priority==='medium'?'bg-amber-100 text-amber-700':'bg-slate-100 text-slate-600'}`}>{l.priority}</span><span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-bold text-blue-700">Score {l.lead_score}</span></div><h2 className="mt-4 text-2xl font-extrabold">{l.organization}</h2><p className="mt-1 text-sm text-slate-500">{[l.industry,l.location].filter(Boolean).join(' · ')}</p><div className="mt-5 grid gap-5 lg:grid-cols-2"><div><h3 className="text-xs font-bold uppercase tracking-wider text-slate-500">Trigger</h3><p className="mt-2 leading-7">{l.trigger_event}</p></div><div><h3 className="text-xs font-bold uppercase tracking-wider text-slate-500">Problem hypothesis</h3><p className="mt-2 leading-7">{l.problem_description}</p></div></div>{l.recommended_pitch&&<div className="mt-5 rounded-2xl bg-slate-50 p-5 dark:bg-slate-950"><h3 className="text-xs font-bold uppercase tracking-wider text-orange-500">Suggested pitch</h3><p className="mt-2 leading-7">{l.recommended_pitch}</p></div>}<div className="mt-5 text-sm"><strong>{l.contact_name||'Target contact'}</strong>{l.contact_title&&` · ${l.contact_title}`}{l.contact_channel&&` · ${l.contact_channel}`}</div></div><div className="w-full lg:w-48"><select value={l.status} onChange={e=>void setStatus(l.id,e.target.value as Status)} className="w-full rounded-xl border px-3 py-2 dark:border-slate-700 dark:bg-slate-950"><option value="new">New</option><option value="reviewed">Reviewed</option><option value="contacted">Contacted</option><option value="qualified">Qualified</option><option value="won">Won</option><option value="lost">Lost</option></select>{l.source_url&&<a href={l.source_url} target="_blank" rel="noreferrer" className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-blue-600">Source <ExternalLink className="h-4 w-4" /></a>}</div></div></article>)}{!loading&&visible.length===0&&<div className="rounded-3xl border border-dashed bg-white p-12 text-center dark:border-slate-700 dark:bg-slate-900">No leads match this view.</div>}</div></div></section>;
+}
