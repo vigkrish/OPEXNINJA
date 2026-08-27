@@ -12,7 +12,7 @@ export const Footer = () => (
             OPEX <span className="text-blue-400">Ninja</span>
           </div>
           <p className="mt-4 max-w-md leading-7">
-            Operational Excellence. Powered by AI. Helping organizations reduce waste, automate intelligently and build stronger management systems.
+            Helping organizations reduce waste, automate intelligently and build stronger management systems.
           </p>
           <p className="mt-6 text-sm text-slate-500">
             Operational Excellence · AI & Automation · Performance Intelligence · Digital Transformation

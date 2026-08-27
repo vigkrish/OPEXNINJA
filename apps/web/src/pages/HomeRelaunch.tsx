@@ -69,7 +69,7 @@ export function HomeRelaunch() {
               <Sparkles className="h-4 w-4 text-orange-400" />
               Lean thinking + automation + practical AI
             </div>
-            <h1 className="max-w-4xl text-5xl font-extrabold tracking-tight sm:text-6xl">Operational Excellence. <span className="text-blue-400">Powered by AI.</span></h1>
+            <h1 className="max-w-4xl text-5xl font-extrabold tracking-tight sm:text-6xl">Operational Excellence. <span className="text-blue-400">Built for measurable results.</span></h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300">
               OPEX Ninja helps organizations reduce operational waste, automate intelligently and build stronger performance systems through Lean, analytics, digital transformation and responsible AI adoption.
             </p>
