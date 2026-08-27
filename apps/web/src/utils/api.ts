@@ -36,7 +36,6 @@ api.interceptors.response.use(
         headers: {
           'Content-Type': 'application/json',
           apikey: SUPABASE_PUBLISHABLE_KEY,
-          Authorization: `Bearer ${SUPABASE_PUBLISHABLE_KEY}`,
           Prefer: 'return=minimal',
         },
         body: JSON.stringify({
