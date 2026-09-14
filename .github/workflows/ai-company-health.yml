@@ -40,10 +40,14 @@ jobs:
         if: always()
         run: python ai_company/orchestrator.py
 
-      - name: Upload status artifact
+      - name: Upload AI company operating state
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: ai-company-status
-          path: .ai-company-state.json
+          name: ai-company-operating-state
+          path: |
+            .ai-company-state.json
+            .ai-company-memory.json
+            .ai-company-tasks.json
+            .ai-company-incidents.json
           if-no-files-found: warn
