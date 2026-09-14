@@ -8,7 +8,7 @@ import { ResourcesPage } from './pages/ResourcesPage';
 import { DiagnosticPage } from './pages/DiagnosticPage';
 import { AdminConsole } from './pages/AdminConsole';
 import { MarketingStudio } from './pages/MarketingStudio';
-import { AICompanyDashboard } from './pages/AICompanyDashboard';
+import { AICompanyOS } from './pages/AICompanyOS';
 import { pageContent } from './content/siteContent';
 import { ThemeProvider } from './context/ThemeContext';
 
@@ -42,7 +42,7 @@ function App() {
   else if (path === 'assessment') content = <DiagnosticPage />;
   else if (path === 'admin') content = <AdminConsole />;
   else if (path === 'admin/marketing') content = <MarketingStudio />;
-  else if (path === 'admin/ai-company') content = <AICompanyDashboard />;
+  else if (path === 'admin/ai-company') content = <AICompanyOS />;
   else if (page) content = <ContentPage {...page} />;
 
   return (
