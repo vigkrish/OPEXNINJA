@@ -9,6 +9,8 @@ from pathlib import Path
 from typing import Any
 
 from incidents import list_incidents, upsert_health_incidents
+from memory import add_agent_note, remember_fact
+from task_queue import create_task, list_tasks
 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG = Path(__file__).with_name("agents.json")
@@ -48,19 +50,47 @@ def load_agents() -> dict[str, Any]:
     return json.loads(CONFIG.read_text())
 
 
+def _create_tasks_for_failures(checks: list[dict[str, Any]]) -> int:
+    created = 0
+    for check in checks:
+        if check.get("ok"):
+            continue
+        create_task(
+            title=f"Repair failed health check: {check.get('name', 'unknown check')}",
+            owner="cto",
+            priority="high",
+            source="health-monitor",
+            metadata={"check": check.get("name"), "detail": check.get("detail", "")[-1200:]},
+        )
+        created += 1
+        add_agent_note("cto", f"Health failure detected: {check.get('name', 'unknown check')}")
+    return created
+
+
 def collect_status() -> dict[str, Any]:
     checks = [run(c) for c in detect_checks()]
     check_dicts = [c.__dict__ for c in checks]
-    created = upsert_health_incidents(check_dicts)
+    created_incidents = upsert_health_incidents(check_dicts)
+    task_candidates = _create_tasks_for_failures(check_dicts)
     incidents = list_incidents()
+    active_tasks = list_tasks(active_only=True)
+    healthy = all(c.ok for c in checks) if checks else True
+
+    remember_fact("last_health_status", "healthy" if healthy else "attention", "orchestrator")
+    remember_fact("last_health_check_at", datetime.now(timezone.utc).isoformat(), "orchestrator")
+    remember_fact("open_incidents", len([i for i in incidents if i.get("status") != "closed"]), "orchestrator")
+    remember_fact("active_tasks", len(active_tasks), "orchestrator")
+
     status = {
         "timestamp": datetime.now(timezone.utc).isoformat(),
         "company": load_agents()["company"],
         "checks": check_dicts,
-        "healthy": all(c.ok for c in checks) if checks else True,
+        "healthy": healthy,
         "autonomy": "guarded",
         "incidents_open": len([i for i in incidents if i.get("status") != "closed"]),
-        "incidents_created": len(created),
+        "incidents_created": len(created_incidents),
+        "active_tasks": len(active_tasks),
+        "task_candidates": task_candidates,
     }
     STATE.write_text(json.dumps(status, indent=2))
     return status
@@ -74,12 +104,13 @@ def executive_summary(status: dict[str, Any]) -> str:
         f"Automated checks: {len(status['checks'])}",
         f"Failures: {len(failed)}",
         f"Open incidents: {status.get('incidents_open', 0)}",
+        f"Active tasks: {status.get('active_tasks', 0)}",
         f"New incidents this cycle: {status.get('incidents_created', 0)}",
     ]
     for item in failed[:5]:
         lines.append(f"• {item['name']}: {item['detail'][-600:]}")
     if failed:
-        lines.append("AI CTO action: incident raised and remediation path initiated; production remains protected.")
+        lines.append("AI CTO action: incident and repair task created; production remains protected by approval gates.")
     else:
         lines.append("AI COO action: continue monitoring; no material intervention required.")
     return "\n".join(lines)
