@@ -19,6 +19,17 @@ function controlAllowed(req: any) {
   return Boolean(expected && req.header('x-ai-company-key') === expected);
 }
 
+const tradingFallback = {
+  connected: false,
+  health: 'disconnected',
+  updated_at: null,
+  certifications: { certified: 0, probation: 0, rejected: 0 },
+  reconciliation: { clean: null, issues: 0, last_run_at: null },
+  executions: { recent: 0, accepted: 0, blocked: 0, last_event_at: null },
+  metrics: {},
+  reason: 'TRADING_TELEMETRY_NOT_INGESTED',
+};
+
 export function aiCompanyRoutes() {
   const router = Router();
 
@@ -29,17 +40,24 @@ export function aiCompanyRoutes() {
     const incidents: any[] = readJson('.ai-company-incidents.json', []) as any[];
     const memory: any = readJson('.ai-company-memory.json', { facts: {}, decisions: [], agent_notes: {} });
     const controls: any = readJson('.ai-company-controls.json', { agents: {} });
+    const trading: any = readJson('.ai-company-trading.json', tradingFallback);
     const activeTasks = tasks.filter((t) => !['done','cancelled'].includes(t.state));
     const openIncidents = incidents.filter((i) => i.status !== 'closed');
-    const agents = (agentsDoc.agents || []).map((a: any) => ({
-      ...a,
-      state: controls.agents?.[a.id]?.state || (activeTasks.some((t) => t.owner === a.id || t.owner === a.name) ? 'working' : 'monitoring'),
-      active_tasks: activeTasks.filter((t) => t.owner === a.id || t.owner === a.name).length,
-    }));
+    const agents = (agentsDoc.agents || []).map((a: any) => {
+      let derivedState = activeTasks.some((t) => t.owner === a.id || t.owner === a.name) ? 'working' : 'monitoring';
+      if (a.id === 'trading_director' && trading.health === 'degraded') derivedState = 'investigating';
+      if (a.id === 'trading_director' && trading.connected === true && trading.health === 'healthy') derivedState = 'working';
+      return {
+        ...a,
+        state: controls.agents?.[a.id]?.state || derivedState,
+        active_tasks: activeTasks.filter((t) => t.owner === a.id || t.owner === a.name).length,
+      };
+    });
     res.json({
       company: agentsDoc.company,
       timestamp: new Date().toISOString(),
       system: state,
+      trading,
       agents,
       tasks: tasks.slice(-100).reverse(),
       incidents: incidents.slice(-100).reverse(),
@@ -51,6 +69,9 @@ export function aiCompanyRoutes() {
         open_incidents: openIncidents.length,
         automation_health: state.healthy === false ? 70 : 100,
         pending_approvals: activeTasks.filter((t) => t.state === 'waiting_approval').length + openIncidents.filter((i) => i.status === 'waiting_approval').length,
+        certified_strategies: Number(trading.certifications?.certified || 0),
+        trading_reconciliation_clean: trading.reconciliation?.clean === true,
+        trading_connected: trading.connected === true,
       },
     });
   });
