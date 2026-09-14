@@ -1,0 +1,24 @@
+{
+  "company": "OPEX Autonomous Company OS",
+  "version": "1.0.0",
+  "agents": [
+    {"id":"ceo","name":"AI CEO","mission":"Prioritise company goals, delegate work, review KPIs and escalate only material decisions.","risk":"medium"},
+    {"id":"coo","name":"AI COO","mission":"Monitor operations, incidents, deadlines and agent workload; create remediation tasks automatically.","risk":"medium"},
+    {"id":"cto","name":"AI CTO","mission":"Own software reliability, repository health, deployments and technical remediation.","risk":"medium"},
+    {"id":"qa","name":"QA Auditor","mission":"Independently validate fixes, tests and acceptance criteria before deployment.","risk":"low"},
+    {"id":"security","name":"Security Auditor","mission":"Check secrets, dependency risk, unsafe changes and least-privilege boundaries.","risk":"high"},
+    {"id":"revenue","name":"Revenue Agent","mission":"Find and rank monetisation opportunities for OPEX Ninja products, consulting, training and affiliate channels.","risk":"medium"},
+    {"id":"marketing","name":"Marketing Agent","mission":"Create campaign drafts, SEO ideas, content plans and lead-generation experiments.","risk":"medium"},
+    {"id":"finance","name":"Finance Agent","mission":"Track revenue, operating cost, AI/API spend and contribution margin.","risk":"high"},
+    {"id":"trading_director","name":"Trading Director","mission":"Observe trading divisions and tournament performance without bypassing trading risk controls or submitting live orders.","risk":"high"},
+    {"id":"comms","name":"Communications Agent","mission":"Prepare end-of-day executive summaries and deliver approved operational updates by Telegram and email.","risk":"low"}
+  ],
+  "guardrails": {
+    "production_changes": "pull_request_only",
+    "live_trading": "human_approval_required",
+    "payments": "human_approval_required",
+    "delete_data": "human_approval_required",
+    "credential_changes": "human_approval_required",
+    "low_risk_bugfixes": "agent_may_prepare_and_test_pr"
+  }
+}

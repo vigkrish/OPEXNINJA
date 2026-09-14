@@ -1,0 +1,33 @@
+name: OPEX AI Company EOD
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '30 13 * * *'
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: npm ci
+      - name: Build company health snapshot
+        run: python ai_company/orchestrator.py
+      - name: Send executive report
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          SMTP_HOST: smtp.gmail.com
+          SMTP_PORT: '587'
+          SMTP_USER: ${{ secrets.OPEX_SMTP_USER }}
+          SMTP_PASSWORD: ${{ secrets.OPEX_SMTP_PASSWORD }}
+          EMAIL_FROM: ${{ secrets.OPEX_SMTP_USER }}
+          EOD_EMAIL_TO: ${{ secrets.OPEX_EOD_EMAIL_TO }}
+        run: python ai_company/notifier.py
