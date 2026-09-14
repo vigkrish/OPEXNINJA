@@ -8,6 +8,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+from incidents import list_incidents, upsert_health_incidents
+
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG = Path(__file__).with_name("agents.json")
 STATE = Path(os.getenv("AI_COMPANY_STATE", ROOT / ".ai-company-state.json"))
@@ -48,12 +50,17 @@ def load_agents() -> dict[str, Any]:
 
 def collect_status() -> dict[str, Any]:
     checks = [run(c) for c in detect_checks()]
+    check_dicts = [c.__dict__ for c in checks]
+    created = upsert_health_incidents(check_dicts)
+    incidents = list_incidents()
     status = {
         "timestamp": datetime.now(timezone.utc).isoformat(),
         "company": load_agents()["company"],
-        "checks": [c.__dict__ for c in checks],
+        "checks": check_dicts,
         "healthy": all(c.ok for c in checks) if checks else True,
         "autonomy": "guarded",
+        "incidents_open": len([i for i in incidents if i.get("status") != "closed"]),
+        "incidents_created": len(created),
     }
     STATE.write_text(json.dumps(status, indent=2))
     return status
@@ -66,6 +73,8 @@ def executive_summary(status: dict[str, Any]) -> str:
         f"Overall health: {'HEALTHY' if status['healthy'] else 'ATTENTION'}",
         f"Automated checks: {len(status['checks'])}",
         f"Failures: {len(failed)}",
+        f"Open incidents: {status.get('incidents_open', 0)}",
+        f"New incidents this cycle: {status.get('incidents_created', 0)}",
     ]
     for item in failed[:5]:
         lines.append(f"• {item['name']}: {item['detail'][-600:]}")
