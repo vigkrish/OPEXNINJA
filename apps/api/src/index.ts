@@ -6,6 +6,7 @@ import { errorHandler } from './middleware/errorHandler';
 import { authRoutes } from './routes/auth';
 import { serviceRoutes } from './routes/services';
 import { contactRoutes } from './routes/contact';
+import { aiCompanyRoutes } from './routes/aiCompany';
 
 const app: Express = express();
 const prisma = new PrismaClient();
@@ -45,6 +46,7 @@ app.get('/health', (_req, res) => {
 app.use('/api/auth', authRoutes(prisma));
 app.use('/api/services', serviceRoutes(prisma));
 app.use('/api/contact', contactRoutes(prisma));
+app.use('/api/ai-company', aiCompanyRoutes());
 
 app.use((_req, res) => {
   res.status(404).json({
