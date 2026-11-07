@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#170b20"><meta name="description" content="A little light, a lot of happiness. Send a personalised Diwali greeting from OPEX Ninja.">
+<meta property="og:title" content="A Diwali surprise from OPEX Ninja"><meta property="og:description" content="Open your festive surprise and share the light.">
+<title>Diwali Wishes | OPEX Ninja</title>
+<style>
+:root{--gold:#f5ce79;--gold2:#fff0c1;--ink:#170b20;--wine:#42112e;--pink:#ffb7a0}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;color:#fff8e9;background:radial-gradient(ellipse at 50% 0%,#632347 0,#2b102c 42%,#100817 100%);font-family:Georgia,'Times New Roman',serif;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.22;background-image:radial-gradient(#f5ce79 1px,transparent 1px);background-size:38px 38px}
+.wrap{width:min(100% - 30px,720px);margin:auto;position:relative;z-index:1;padding:25px 0 40px}
+.brand{display:flex;align-items:center;justify-content:center;gap:10px;font:700 12px/1.2 Arial,sans-serif;letter-spacing:3px;color:var(--gold);text-transform:uppercase}
+.brand-mark{width:35px;height:35px;border:1px solid #d8ad61;border-radius:50%;display:grid;place-items:center;font-size:20px}
+.hero{text-align:center;padding:30px 12px 10px}.eyebrow{color:var(--gold);font:700 10px Arial,sans-serif;letter-spacing:4px;text-transform:uppercase}
+h1{font-size:clamp(42px,10vw,72px);line-height:.98;margin:14px 0 12px;font-weight:500;color:var(--gold2);text-shadow:0 3px 28px #f6b94c55}
+.subtitle{font-size:17px;line-height:1.6;color:#f6d9ce;max-width:490px;margin:0 auto}
+.ornament{color:var(--gold);letter-spacing:10px;margin:20px 0;font-size:17px}
+.panel{background:linear-gradient(145deg,#fff9eb12,#f6d18b08);border:1px solid #e7c17b55;border-radius:24px;padding:clamp(18px,5vw,34px);box-shadow:0 20px 70px #0005,inset 0 0 40px #fff1}
+.form-title{text-align:center;color:var(--gold2);font-size:25px;font-weight:500;margin:0 0 7px}.hint{text-align:center;color:#e9c9c4;font:13px/1.5 Arial,sans-serif;margin:0 0 22px}
+label{display:block;color:var(--gold);font:700 10px Arial,sans-serif;letter-spacing:1.5px;text-transform:uppercase;margin:15px 0 7px}
+input,textarea{width:100%;border:1px solid #d9b46a66;background:#1c0d22;color:#fff8e9;border-radius:12px;padding:13px 14px;font:15px Arial,sans-serif;outline:none}
+input:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px #f5ce7922}textarea{min-height:90px;resize:vertical}
+.btn{border:0;border-radius:999px;padding:14px 20px;background:linear-gradient(110deg,#f6d78d,#c68b3d);color:#321026;font:700 13px Arial,sans-serif;letter-spacing:.4px;cursor:pointer;box-shadow:0 7px 22px #0004;transition:transform .2s}
+.btn:active{transform:scale(.97)}.btn.secondary{background:transparent;color:var(--gold2);border:1px solid #e5c17c88;box-shadow:none}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.actions .btn{flex:1;min-width:145px}
+.small{font:11px/1.5 Arial,sans-serif;color:#d6b8b8;text-align:center;margin-top:15px}
+.hidden{display:none!important}
+.greeting{text-align:center}.to-line{font:13px Arial,sans-serif;color:#f3c98a;letter-spacing:2px;text-transform:uppercase;margin:4px 0 14px}
+.message{font-size:clamp(18px,4vw,22px);line-height:1.65;color:#ffe8d7;white-space:pre-wrap;margin:20px auto;max-width:510px}
+.from{font:13px Arial,sans-serif;color:#e8c5b5;letter-spacing:1px;margin-top:18px}
+.gift-stage{height:210px;display:grid;place-items:center;position:relative;margin:12px 0 5px}
+.gift{width:142px;height:112px;position:relative;cursor:pointer;filter:drop-shadow(0 15px 18px #0008);animation:float 3s ease-in-out infinite}
+.gift-box{position:absolute;bottom:0;width:142px;height:86px;background:linear-gradient(100deg,#a51d42,#e84d57 50%,#9c1639);border:2px solid #f6cb77;border-radius:5px}
+.gift-box:before{content:"";position:absolute;left:58px;top:0;width:22px;height:100%;background:linear-gradient(90deg,#f4d88c,#fff0bc,#c88d42)}
+.gift-lid{position:absolute;z-index:2;top:18px;left:-8px;width:158px;height:28px;border:2px solid #f6d58c;border-radius:5px;background:linear-gradient(#f34e5a,#b51d40);transform-origin:12% 100%;transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+.gift-lid:before{content:"";position:absolute;left:66px;top:0;width:22px;height:100%;background:linear-gradient(90deg,#f4d88c,#fff0bc,#c88d42)}
+.bow{position:absolute;z-index:3;top:-4px;left:54px;width:34px;height:24px;border:5px solid #f7dc9c;border-radius:80% 10% 80% 10%;transform:rotate(25deg)}
+.bow:after{content:"";position:absolute;width:34px;height:24px;border:5px solid #f7dc9c;border-radius:10% 80% 10% 80%;left:18px;top:-5px;transform:rotate(-50deg)}
+.gift.open .gift-lid{transform:translate(-18px,-72px) rotate(-28deg)}.gift.open{animation:none}
+.tap{font:11px Arial,sans-serif;letter-spacing:2px;color:var(--gold);text-transform:uppercase}
+.lamp-row{display:flex;justify-content:center;gap:23px;margin:22px 0 8px}
+.lamp{font-size:29px;filter:drop-shadow(0 0 9px #ffb84b);animation:flicker 1.8s infinite alternate}
+@keyframes float{50%{transform:translateY(-9px)}}@keyframes flicker{from{filter:brightness(.85) drop-shadow(0 0 5px #ffb84b)}to{filter:brightness(1.3) drop-shadow(0 0 15px #ffb84b)}}
+.footer{text-align:center;color:#b99a9d;font:10px Arial,sans-serif;letter-spacing:1px;margin:25px 0 0}.footer b{color:var(--gold)}
+#sparkles{position:fixed;inset:0;pointer-events:none;z-index:4;overflow:hidden}.spark{position:absolute;width:5px;height:5px;border-radius:50%;background:#ffe9a5;box-shadow:0 0 12px 3px #f5b84c;animation:burst 1.5s ease-out forwards}
+@keyframes burst{0%{transform:translate(0,0) scale(.2);opacity:1}100%{transform:translate(var(--x),var(--y)) scale(0);opacity:0}}
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:#fff0c1;color:#321026;padding:11px 18px;border-radius:99px;font:12px Arial,sans-serif;z-index:9;box-shadow:0 5px 25px #0008}
+@media(max-width:430px){.wrap{width:min(100% - 22px,720px)}.hero{padding-top:24px}.panel{border-radius:20px}.gift-stage{height:185px}}
+</style>
+</head>
+<body><div id="sparkles"></div><main class="wrap">
+<header class="brand"><span class="brand-mark">ॐ</span><span>OPEX NINJA</span></header>
+<section class="hero"><div class="eyebrow">A season of light & new beginnings</div><h1>Happy<br>Diwali</h1><p class="subtitle">May your home glow with happiness, your heart shine with peace, and every new beginning bring prosperity.</p><div class="ornament">✦ ❖ ✦</div></section>
+<section id="creator" class="panel">
+<h2 class="form-title">Send a little sparkle</h2><p class="hint">Create a personal Diwali surprise for someone special.</p>
+<label for="recipient">Recipient's name</label><input id="recipient" maxlength="50" placeholder="Who are you wishing?">
+<label for="sender">Your name</label><input id="sender" maxlength="60" value="Vignesh Krishnakumar">
+<label for="note">Your personal message</label><textarea id="note" maxlength="280">Wishing you and your family a Diwali filled with light, laughter, good health and prosperity. May every diya bring a new reason to smile!</textarea>
+<div class="actions"><button class="btn" id="make">Create my greeting ✨</button></div><p class="small">Your names and message are placed in the link. No account or sign-in needed.</p>
+</section>
+<section id="card" class="panel greeting hidden">
+<div class="eyebrow">A special festive surprise for you</div><div class="gift-stage"><div id="gift" class="gift" role="button" tabindex="0" aria-label="Open your Diwali gift"><div class="gift-lid"></div><div class="bow"></div><div class="gift-box"></div></div></div><div class="tap" id="tap">Tap the gift to open your surprise</div>
+<div id="revealed" class="hidden"><div class="ornament">✦ 🪔 ✦</div><div class="to-line" id="toText"></div><h2 class="form-title" style="font-size:32px">Shubh Deepavali!</h2><p class="message" id="messageText"></p><div class="lamp-row"><span class="lamp">🪔</span><span class="lamp">🪔</span><span class="lamp">🪔</span></div><p class="from" id="fromText"></p><div class="actions"><button class="btn" id="share">Share this greeting ↗</button><button class="btn secondary" id="again">Create another</button></div></div>
+</section>
+<footer class="footer">MADE WITH LIGHT & GOOD WISHES · <b>OPEX NINJA</b></footer>
+</main>
+<script>
+(()=>{const $=id=>document.getElementById(id);const params=new URLSearchParams(location.search);const safe=(s,max)=>String(s||"").slice(0,max);const data={to:safe(params.get("to"),50),from:safe(params.get("from")||"Vignesh Krishnakumar",60),msg:safe(params.get("msg")||"Wishing you and your family a Diwali filled with light, laughter, good health and prosperity. May every diya bring a new reason to smile!",280)};let opened=false;
+function showCard(){ $("creator").classList.add("hidden");$("card").classList.remove("hidden");$("toText").textContent=data.to?"FOR "+data.to:"A WISH FOR YOU";$("messageText").textContent=data.msg;$("fromText").textContent="With warm wishes, "+data.from;window.scrollTo({top:0,behavior:"smooth"});}
+function makeLink(){const q=new URLSearchParams({to:safe($("recipient").value.trim(),50),from:safe($("sender").value.trim()||"Vignesh Krishnakumar",60),msg:safe($("note").value.trim(),280)});return location.origin+location.pathname+"?"+q.toString();}
+$("make").addEventListener("click",()=>{data.to=safe($("recipient").value.trim(),50);data.from=safe($("sender").value.trim()||"Vignesh Krishnakumar",60);data.msg=safe($("note").value.trim(),280);history.replaceState(null,"",makeLink());showCard();});
+function burst(){const root=$("sparkles");for(let i=0;i<34;i++){const s=document.createElement("i");s.className="spark";s.style.left=(35+Math.random()*30)+"%";s.style.top=(25+Math.random()*35)+"%";s.style.setProperty("--x",(Math.random()*360-180)+"px");s.style.setProperty("--y",(Math.random()*300-150)+"px");root.appendChild(s);setTimeout(()=>s.remove(),1600);}}
+function openGift(){if(opened)return;opened=true;$("gift").classList.add("open");$("tap").classList.add("hidden");setTimeout(()=>{$("revealed").classList.remove("hidden");burst();},550);}
+$("gift").addEventListener("click",openGift);$("gift").addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openGift();}});
+$("share").addEventListener("click",async()=>{const url=makeLink();const text="🪔 A little Diwali surprise for you! Open your greeting: "+url;if(navigator.share){try{await navigator.share({title:"Happy Diwali from OPEX Ninja",text:"A little Diwali surprise for you!",url});return;}catch(e){if(e.name==="AbortError")return;}}if(navigator.clipboard&&window.isSecureContext){try{await navigator.clipboard.writeText(url);toast("Your greeting link is copied!");return;}catch(e){}}window.open("https://wa.me/?text="+encodeURIComponent(text),"_blank","noopener");});
+$("again").addEventListener("click",()=>{history.replaceState(null,"",location.pathname);location.reload();});
+function toast(t){const el=document.createElement("div");el.className="toast";el.textContent=t;document.body.appendChild(el);setTimeout(()=>el.remove(),2500);}
+if(params.has("to")||params.has("msg")||params.has("from"))showCard();
+})();
+</script></body></html>
