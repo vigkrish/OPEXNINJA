@@ -50,6 +50,12 @@ jobs:
       - name: Build website
         run: npm run build:web
 
+      - name: Add standalone Diwali greeting app
+        run: |
+          mkdir -p apps/web/dist/diwali
+          cp diwali/index.html apps/web/dist/diwali/index.html
+          echo "Added standalone Diwali greeting at /diwali/"
+
       - name: Inspect built site
         run: |
           echo "Listing built files..."
