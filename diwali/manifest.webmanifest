@@ -1,0 +1,19 @@
+{
+  "name": "OPEX Ninja Diwali Greetings",
+  "short_name": "Diwali Wishes",
+  "description": "Create and share personalised Diwali greetings.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#160d24",
+  "theme_color": "#160d24",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
