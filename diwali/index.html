@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#160d24"><meta name="description" content="Send a little light this Diwali. Create a personal Diwali greeting from OPEX Ninja.">
+<meta name="theme-color" content="#160d24"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><link rel="manifest" href="./manifest.webmanifest"><link rel="icon" href="./icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="./icon.svg"><meta name="description" content="Send a little light this Diwali. Create a personal Diwali greeting from OPEX Ninja.">
 <meta property="og:title" content="A little Diwali light, just for you ✨"><meta property="og:description" content="Open your personalised Diwali greeting.">
 <title>A Diwali Gift for You ✨ | OPEX Ninja</title>
 <style>
@@ -71,6 +71,6 @@ function make(){values.to=$("to").value.trim()||"You & your family";values.from=
 $("make").addEventListener("click",make);$("reset").addEventListener("click",()=>{Object.assign(values,defaults);setForm();paint();$("shareActions").classList.add("hidden");$("status").textContent="Greeting reset. Make it yours again!";history.replaceState({}, "",location.pathname);});
 $("copy").addEventListener("click",async()=>{try{await navigator.clipboard.writeText(link());$("status").textContent="Link copied — paste it into WhatsApp, SMS or email.";}catch(e){$("status").textContent=link();}});
 $("share").addEventListener("click",async()=>{const url=link();if(navigator.share){try{await navigator.share({title:"A Diwali gift for you ✨",text:"Wishing you a bright and beautiful Diwali!",url});}catch(e){}}else{try{await navigator.clipboard.writeText(url);$("status").textContent="Link copied — share it with everyone!";}catch(e){$("status").textContent=url;}}});
-if(params.has("from")||params.has("to")||params.has("msg")){$("creator").classList.add("hidden");paint();}else{setForm();paint();}
+if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));}\nif(params.has("from")||params.has("to")||params.has("msg")){$("creator").classList.add("hidden");paint();}else{setForm();paint();}
 })();
 </script></body></html>
