@@ -53,8 +53,8 @@ jobs:
       - name: Add standalone Diwali greeting app
         run: |
           mkdir -p apps/web/dist/diwali
-          cp diwali/index.html apps/web/dist/diwali/index.html
-          echo "Added standalone Diwali greeting at /diwali/"
+          cp -R diwali/. apps/web/dist/diwali/
+          echo "Added Diwali web app and PWA assets at /diwali/"
 
       - name: Inspect built site
         run: |
