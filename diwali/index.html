@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#160d24"><meta name="description" content="Send a little light this Diwali. Create a personal Diwali greeting from OPEX Ninja.">
+<meta property="og:title" content="A little Diwali light, just for you ✨"><meta property="og:description" content="Open your personalised Diwali greeting.">
+<title>A Diwali Gift for You ✨ | OPEX Ninja</title>
+<style>
+:root{--gold:#f6c76b;--cream:#fff4d8;--muted:#d9c9b2;--ink:#160d24;--pink:#ff8e9c}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;color:var(--cream);font-family:Georgia,'Times New Roman',serif;background:radial-gradient(ellipse at 50% 0%,#58305b 0,#281532 42%,#100a1b 100%);overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.35;background-image:radial-gradient(#ffd987 1px,transparent 1px),radial-gradient(#fff 1px,transparent 1px);background-size:73px 73px,119px 119px;background-position:0 0,35px 47px}
+.wrap{position:relative;width:min(100% - 28px,680px);margin:0 auto;padding:26px 0 48px;text-align:center}
+.brand{font:700 12px/1.2 system-ui,sans-serif;letter-spacing:.28em;color:var(--gold);text-transform:uppercase}
+.hero{margin:20px auto 12px;color:var(--gold);font-size:clamp(36px,9vw,64px);line-height:1.02;text-shadow:0 0 28px #f5b64a55}
+.sub{font:14px/1.7 system-ui,sans-serif;color:var(--muted);max-width:460px;margin:0 auto 25px}
+.card{position:relative;padding:34px 24px 28px;border:1px solid #e6bd735c;border-radius:26px;background:linear-gradient(145deg,#fff7e9 0%,#f5dfbd 100%);color:#49263c;box-shadow:0 24px 70px #0008,inset 0 0 0 6px #fff9,inset 0 0 0 7px #d5a45c66;overflow:hidden}
+.card:before,.card:after{content:"✦";position:absolute;color:#c28b43;font-size:24px}.card:before{top:17px;left:19px}.card:after{right:19px;bottom:15px}
+.lamp{font-size:48px;filter:drop-shadow(0 0 12px #e69a3c);animation:glow 2s ease-in-out infinite alternate}
+@keyframes glow{from{filter:drop-shadow(0 0 5px #e69a3c)}to{filter:drop-shadow(0 0 20px #ffb94c)}}
+.card h2{font-size:clamp(31px,7vw,47px);font-weight:500;line-height:1.08;margin:12px 0;color:#8b3b4d}
+.to{font:12px system-ui,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#916a4d}
+.recipient{font-size:25px;color:#5b2b46;margin:7px 0 16px}
+.message{font-size:18px;line-height:1.65;white-space:pre-wrap;margin:0 auto;max-width:480px}
+.from{margin-top:23px;font:13px/1.6 system-ui,sans-serif;color:#76536a}
+.from strong{display:block;font:italic 22px Georgia,serif;color:#8b3b4d;margin-top:3px}
+.diyas{font-size:25px;letter-spacing:10px;margin-top:21px}
+.panel{margin:24px auto 0;padding:21px;text-align:left;border:1px solid #ffffff24;border-radius:18px;background:#ffffff0b;backdrop-filter:blur(8px)}
+.panel h3{margin:0 0 14px;color:var(--gold);font:600 15px system-ui,sans-serif}
+label{display:block;font:12px system-ui,sans-serif;color:var(--muted);margin:12px 0 6px}
+input,textarea,select{width:100%;border:1px solid #ffffff30;border-radius:11px;background:#160d24;color:#fff4d8;padding:12px 13px;font:15px system-ui,sans-serif;outline:none}
+textarea{min-height:86px;resize:vertical}input:focus,textarea:focus,select:focus{border-color:var(--gold)}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+button,.sharelink{flex:1 1 145px;border:0;border-radius:999px;padding:13px 16px;background:linear-gradient(110deg,#f6c76b,#e89c62);color:#32182d;font:700 13px system-ui,sans-serif;text-align:center;text-decoration:none;cursor:pointer}
+button.secondary,.sharelink.secondary{background:#ffffff12;border:1px solid #ffffff35;color:var(--cream)}
+.note{font:11px/1.6 system-ui,sans-serif;color:#cbb9c9;text-align:center;margin:18px auto 0}
+.hidden{display:none!important}
+@media(min-width:620px){.wrap{padding-top:38px}.card{padding:44px 40px 34px}.panel{padding:25px}}
+</style></head>
+<body><main class="wrap">
+<div class="brand">OPEX NINJA PRESENTS</div>
+<div class="hero">✨ Happy Diwali ✨</div>
+<p class="sub">A little light, a little love, and a whole lot of happiness — wrapped up just for you.</p>
+<section class="card" aria-live="polite">
+<div class="lamp">🪔</div>
+<div class="to">A special wish for</div>
+<div class="recipient" id="showTo">You &amp; your family</div>
+<h2>May your world<br>shine brighter</h2>
+<p class="message" id="showMsg">May this Diwali bring new beginnings, peaceful moments, good health and endless reasons to smile. Wishing you and your loved ones a beautiful festival of lights!</p>
+<div class="from">With warm wishes from<strong id="showFrom">Vignesh Krishnakumar</strong></div>
+<div class="diyas">🪔 ✨ 🪔</div>
+</section>
+<section class="panel" id="creator">
+<h3>Make this greeting your own</h3>
+<label for="to">Who are you sending this to?</label><input id="to" maxlength="60" placeholder="Name or family (optional)">
+<label for="from">Your name</label><input id="from" maxlength="60" value="Vignesh Krishnakumar">
+<label for="msg">Your personal message</label><textarea id="msg" maxlength="420">May this Diwali bring new beginnings, peaceful moments, good health and endless reasons to smile. Wishing you and your loved ones a beautiful festival of lights!</textarea>
+<div class="actions"><button id="make">Create my shareable greeting</button><button class="secondary" id="reset">Reset</button></div>
+<div class="actions hidden" id="shareActions"><button id="share">Share greeting</button><button class="secondary" id="copy">Copy greeting link</button><a class="sharelink secondary" id="wa" target="_blank" rel="noopener">Send on WhatsApp</a></div>
+<p class="note" id="status" role="status">Personalise the names and message, then create a link anyone can open.</p>
+</section>
+<p class="note">Made with light &amp; love · OPEX Ninja</p>
+</main>
+<script>
+(()=>{const $=id=>document.getElementById(id);const params=new URLSearchParams(location.search);
+const defaults={to:"You & your family",from:"Vignesh Krishnakumar",msg:"May this Diwali bring new beginnings, peaceful moments, good health and endless reasons to smile. Wishing you and your loved ones a beautiful festival of lights!"};
+const values={to:params.get("to")||defaults.to,from:params.get("from")||defaults.from,msg:params.get("msg")||defaults.msg};
+function paint(){ $("showTo").textContent=values.to||"You & your family";$("showFrom").textContent=values.from||"With warm wishes";$("showMsg").textContent=values.msg||defaults.msg;}
+function setForm(){ $("to").value=values.to==="You & your family"?"":values.to;$("from").value=values.from;$("msg").value=values.msg; }
+function link(){const u=new URL(location.href);u.search="";u.searchParams.set("to",values.to||"You & your family");u.searchParams.set("from",values.from||"");u.searchParams.set("msg",values.msg||defaults.msg);return u.toString();}
+function make(){values.to=$("to").value.trim()||"You & your family";values.from=$("from").value.trim()||"A friend";values.msg=$("msg").value.trim()||defaults.msg;paint();const url=link();$("shareActions").classList.remove("hidden");$("wa").href="https://wa.me/?text="+encodeURIComponent("A Diwali wish for you 🪔✨\n"+url);$("status").textContent="Your greeting is ready. Share the link with family and friends!";history.replaceState({}, "", url);}
+$("make").addEventListener("click",make);$("reset").addEventListener("click",()=>{Object.assign(values,defaults);setForm();paint();$("shareActions").classList.add("hidden");$("status").textContent="Greeting reset. Make it yours again!";history.replaceState({}, "",location.pathname);});
+$("copy").addEventListener("click",async()=>{try{await navigator.clipboard.writeText(link());$("status").textContent="Link copied — paste it into WhatsApp, SMS or email.";}catch(e){$("status").textContent=link();}});
+$("share").addEventListener("click",async()=>{const url=link();if(navigator.share){try{await navigator.share({title:"A Diwali gift for you ✨",text:"Wishing you a bright and beautiful Diwali!",url});}catch(e){}}else{try{await navigator.clipboard.writeText(url);$("status").textContent="Link copied — share it with everyone!";}catch(e){$("status").textContent=url;}}});
+if(params.has("from")||params.has("to")||params.has("msg")){$("creator").classList.add("hidden");paint();}else{setForm();paint();}
+})();
+</script></body></html>
